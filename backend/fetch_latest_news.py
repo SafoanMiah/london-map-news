@@ -32,7 +32,7 @@ def get_news_by_days(days: int):
         } for article in articles]
 
         # Save to a different JSON file
-        output_path = Path(root_dir) / 'app' / 'public' / f'news_{days}days.json'
+        output_path = Path(root_dir) / 'website' / 'public' / f'news_{days}days.json'
         output_path.parent.mkdir(parents=True, exist_ok=True)
         
         with output_path.open('w', encoding='utf-8') as f:
@@ -40,6 +40,7 @@ def get_news_by_days(days: int):
             
         print(f"Saved {len(news_data)} articles from last {days} days")
         return news_data
+    
     except Exception as e:
         print(f"Error fetching {days}-day news: {e}")
         return []

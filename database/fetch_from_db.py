@@ -40,12 +40,11 @@ def fetch_column(column: str):
 
 # Test usage
 if __name__ == "__main__":
-    # print(fetch_column("id"))
     articles = fetch_articles(sample=1)
     for article in articles:
         print('\n')
-        print(f"📰 {article['title']}")
-        print(f"🔗 Link: {article['link']}")
-        print(f"📅 Created: {article['created_at']}")
-        print(f"🖼️ Thumbnail: {article['thumbnail_url']}\n")
+        print(f"{article['title']}")
+        print(f"Link: {article['link']}")
+        print(f"Created: {article['created_at']}")
+        print(f"Thumbnail: {article['thumbnail_url']}\n")
         print('\n')
