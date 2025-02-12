@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 17% 12%;
+    --foreground: 0 0% 98%;
+    --card: 220 17% 14%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 17% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 142 72% 65%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 143 45% 45%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 17% 18%;
+    --muted-foreground: 220 10% 75%;
+    --accent: 142 72% 65%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 17% 18%;
+    --input: 220 17% 18%;
+    --ring: 142 72% 65%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  .glass-panel {
+    @apply backdrop-blur-lg bg-background/30 border border-white/10 shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+}
+
+.map-container {
+  @apply w-full h-full;
+}
+
+.borough {
+  @apply fill-muted stroke-secondary/30 transition-colors duration-200;
+}
+
+.borough:hover {
+  @apply fill-primary/30 stroke-primary cursor-pointer;
+}
+
+.tooltip {
+  @apply glass-panel px-3 py-2 rounded-lg text-sm font-medium shadow-lg;
+}
+
+.sidebar {
+  @apply glass-panel h-screen overflow-hidden border-r border-white/10 relative;
+  transition: width 0.15s ease;
+  touch-action: none;
+  min-width: min(260px, 90vw);
+  max-width: min(1000px, 90vw);
+}
+
+.resize-handle {
+  @apply absolute top-0 right-0 w-4 h-full cursor-col-resize opacity-0 group-hover:opacity-100 flex items-center justify-center;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.2));
+  touch-action: none;
+}
+
+.resize-handle:hover,
+.resize-handle:active,
+.dragging .resize-handle {
+  @apply opacity-100;
+}
+
+.dragging {
+  @apply select-none;
+  transition: none;
+  cursor: col-resize !important;
+}
+
+.dragging * {
+  @apply pointer-events-none;
+  user-select: none;
+}
+
+.resize-handle>svg {
+  @apply text-primary/50 hover:text-primary transition-colors duration-300 opacity-0 group-hover:opacity-100;
+}
+
+.sidebar.dragging {
+  @apply cursor-col-resize select-none;
+}
+
+.sidebar.dragging * {
+  @apply pointer-events-none;
+}
+
+.news-card {
+  @apply glass-panel p-0 rounded-xl mb-4 hover:bg-white/5 transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.01] relative z-0;
+  max-width: 100%;
+  width: calc(100% - 1rem);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.news-card-content {
+  @apply p-4 transition-all duration-300;
+}
+
+.news-card a {
+  @apply transition-colors duration-300 hover:text-primary;
+}
+
+.sentiment-badge {
+  @apply text-xs sm:text-sm px-3 py-1 rounded-full font-medium backdrop-blur-md transition-all duration-300 hover:scale-[1.02];
+}
+
+.sentiment-positive {
+  @apply bg-primary/20 text-primary;
+}
+
+.sentiment-negative {
+  @apply bg-destructive/20 text-destructive;
+}
+
+.sentiment-neutral {
+  @apply bg-secondary/20 text-secondary;
+}
+
+.news-container {
+  animation: scroll 120s linear infinite;
+  will-change: transform;
+  padding-bottom: 2rem;
+  @apply px-2 sm:px-4 relative;
+  width: 100%;
+}
+
+.news-container:hover {
+  animation-play-state: paused;
+}
+
+.news-group {
+  @apply space-y-4 sm:space-y-6 relative;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(calc(-100% + 2rem));
+  }
+}
+
+.news-image {
+  @apply w-full object-cover rounded-t-xl transition-transform duration-300;
+  height: clamp(120px, 25vh, 200px);
+}
+
+.news-card:hover .news-image {
+  transform: scale(1.02);
+}
+
+.news-title {
+  @apply text-sm sm:text-base lg:text-lg font-medium transition-all duration-300;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-summary {
+  @apply text-xs sm:text-sm lg:text-base text-muted-foreground transition-all duration-300;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-card .gradient-overlay {
+  @apply absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 transition-opacity duration-300;
+}
+
+.news-card:hover .gradient-overlay {
+  @apply opacity-100;
+}
+
+.news-card:hover {
+  @apply z-10;
+  transform: scale(1.01) translateY(0);
+  transition: all 0.3s ease;
+}
+
+.news-marker {
+  @apply stroke-white/10 stroke-2 hover:stroke-white/30 hover:scale-125 shadow-lg;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Update viewBox calculation in map */
+.map-container svg {
+  @apply w-full h-full;
+  viewBox: 0 0 calc(100vw - 480px) 100vh;
+}
