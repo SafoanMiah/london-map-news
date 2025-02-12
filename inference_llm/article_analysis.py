@@ -56,10 +56,12 @@ def analyze_article(title, description):
         "max_tokens": 500
     }
 
+    # Try to analyze article
     try:
         response = requests.post(GROQ_API_URL, headers=headers, json=payload)
         response.raise_for_status()
         result = response.json()
+        
         
         ai_response = result['choices'][0]['message']['content'].strip()
         lines = [line.strip() for line in ai_response.split('\n') if line.strip()]
@@ -71,8 +73,11 @@ def analyze_article(title, description):
             sentiment = float(sentiment_str.split()[0])
         except ValueError:
             sentiment = 0
-            
+        
+        # Parse topic
         topic = next(line.split(': ', 1)[1] for line in lines if line.startswith('Topic:'))
+        
+        # Parse summary
         summary = next(line.split(': ', 1)[1] for line in lines if line.startswith('Summary:'))
 
         # Ensure location is a valid borough
@@ -87,11 +92,11 @@ def analyze_article(title, description):
         }
 
     except Exception as e:
-        print(f"Error analyzing article: {e}")
+        # print(f"Error analyzing article: {e}")
         # Handle rate limiting by adding a delay
         if "429" in str(e):
-            print("Rate limited, waiting 60 seconds...")
-            time.sleep(60)
+            print("Rate limited, waiting 10 seconds...")
+            time.sleep(10)
         
         # Safe fallback values incase of error
         safe_description = description if description else "No description available"
@@ -103,13 +108,3 @@ def analyze_article(title, description):
             "topic": "Other", 
             "summary": safe_summary
         }
-
-# Example usage
-if __name__ == "__main__":
-    sample_article = {
-        "title": "East London schools put into 'lockdown' by police over threatening emails",
-        "description": "Schools in Hackney were reportedly forced into lockdown this week when threatening emails were sent, leading police to attend one school to search the grounds and to reassure parents and up patrols..."
-    }
-    
-    result = analyze_article(sample_article["title"], sample_article["description"])
-    print(result) 
