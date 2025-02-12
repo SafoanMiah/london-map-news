@@ -4,7 +4,7 @@ import requests
 
 
 
-# CLEANING FUNCTIONSs
+# clean dates
 def clean_all_dates(date_str):
     try:
         date = datetime.strptime(date_str, "%a, %d %b %Y %H:%M:%S %z")

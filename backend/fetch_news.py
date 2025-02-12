@@ -18,7 +18,7 @@ def extract_clean_news(url_tuple, allowed_links):
         
         for entry in processed_entries:
             if entry.link not in allowed_links:
-                continue  # Skip parsing non-unique links
+                continue  # skip parsing non-unique links
 
             items.append({
                 "title": entry.title,

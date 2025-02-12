@@ -1,1 +1,6 @@
 groq
+supabase
+feedparser
+beautifulsoup4
+requests
+python-dotenv
