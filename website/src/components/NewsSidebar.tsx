@@ -1,7 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import { GripVertical } from 'lucide-react';
 
 interface NewsItem {
   id: string;
@@ -34,68 +33,24 @@ export const NewsSidebar = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [news, setNews] = useState<NewsItem[]>([]);
 
-  // Calculate default and constraint widths based on screen size
-  const getWidthConstraints = () => {
+  // Calculate default width based on screen size
+  const getWidth = () => {
     const screenWidth = window.innerWidth;
     if (screenWidth >= 1920) { // 2K and above
-      return { default: 600, min: 400, max: 1000 };
+      return 500;
     } else if (screenWidth >= 1440) { // Large desktop
-      return { default: 550, min: 350, max: 800 };
+      return 450;
     } else if (screenWidth >= 1024) { // Desktop
-      return { default: 480, min: 300, max: 600 };
+      return 400;
     } else if (screenWidth >= 768) { // Tablet
-      return { default: 400, min: 280, max: 500 };
+      return 400;
     } else { // Mobile
-      return { default: 320, min: 260, max: 400 };
+      return 350;
     }
   };
 
   // Initialize width with responsive default
-  const [width, setWidth] = useState(getWidthConstraints().default);
-  const [isDragging, setIsDragging] = useState(false);
-  const sidebarRef = useRef<HTMLElement>(null);
-
-  // Update width constraints on window resize
-  useEffect(() => {
-    const handleResize = () => {
-      const { default: defaultWidth, min, max } = getWidthConstraints();
-      setWidth(prev => Math.min(Math.max(prev, min), max));
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setIsDragging(true);
-    document.body.style.cursor = 'col-resize';
-  };
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
-      const { min, max } = getWidthConstraints();
-      const newWidth = Math.max(min, Math.min(max, e.clientX));
-      setWidth(newWidth);
-      window.dispatchEvent(new Event('resize'));
-    };
-
-    const handleMouseUp = () => {
-      setIsDragging(false);
-      document.body.style.cursor = '';
-    };
-
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-    }
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
-  }, [isDragging]);
+  const [width] = useState(getWidth());
 
   const fetchLatestNews = async () => {
     try {
@@ -146,8 +101,7 @@ export const NewsSidebar = () => {
 
   return (
     <aside
-      ref={sidebarRef}
-      className={`sidebar group ${isDragging ? 'dragging' : ''}`}
+      className="sidebar"
       style={{ width: `${width}px` }}
     >
       <div className="flex flex-col h-full p-4 sm:p-6">
@@ -240,13 +194,6 @@ export const NewsSidebar = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div
-        className="resize-handle"
-        onMouseDown={handleMouseDown}
-        onTouchStart={(e) => e.preventDefault()}
-      >
-        <GripVertical className="w-4 h-4" />
       </div>
       <style>{`
         .news-container {

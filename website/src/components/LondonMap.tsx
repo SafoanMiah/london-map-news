@@ -56,6 +56,7 @@ export const LondonMap = () => {
   const [selectedBorough, setSelectedBorough] = useState<string | null>(null);
   const [newsMarkers, setNewsMarkers] = useState<NewsMarker[]>([]);
   const [selectedArticles, setSelectedArticles] = useState<NewsMarker[]>([]);
+  const [selectedTopics, setSelectedTopics] = useState<Set<string>>(new Set());
 
   // Fetch news markers
   useEffect(() => {
@@ -67,6 +68,10 @@ export const LondonMap = () => {
         }
         const data = await response.json();
         setNewsMarkers(data);
+
+        // Initialize selectedTopics with all topics
+        const allTopics = new Set(data.map((article: NewsMarker) => article.topic));
+        setSelectedTopics(allTopics as Set<string>);
       } catch (error) {
         console.error('Error fetching news:', error);
         toast({
@@ -181,17 +186,41 @@ export const LondonMap = () => {
     });
   }, [newsMarkers, selectedBorough]);
 
+  const toggleTopic = (topic: string) => {
+    setSelectedTopics(prev => {
+      const newTopics = new Set<string>();
+      if (topic === 'ALL') {
+        // Select all topics
+        newsMarkers.forEach(article => newTopics.add(article.topic));
+      } else {
+        // Select only the clicked topic
+        newTopics.add(topic);
+      }
+      return newTopics;
+    });
+  };
+
+  // Reset topic selection when borough changes
+  useEffect(() => {
+    if (selectedBorough) {
+      const allTopics = new Set(newsMarkers.map(article => article.topic));
+      setSelectedTopics(allTopics);
+    }
+  }, [selectedBorough]);
+
   return (
     <div className="w-full h-full relative">
       <div className="absolute top-4 right-4 w-72">
         <BoroughStats
           selectedBorough={selectedBorough}
           newsData={newsMarkers}
+          onToggleTopic={toggleTopic}
+          selectedTopics={selectedTopics}
         />
       </div>
       <svg
         ref={mapRef}
-        className="w-full h-full"
+        className="w-full h-full transform translate-x-[-100px]"
         viewBox={`0 0 ${window.innerWidth - 480} ${window.innerHeight}`}
         preserveAspectRatio="xMidYMid meet"
       />
@@ -202,6 +231,7 @@ export const LondonMap = () => {
           setSelectedArticles([]);
           setSelectedBorough(null);
         }}
+        selectedTopics={selectedTopics}
       />
       <style>{`
         @keyframes fadeSlideIn {

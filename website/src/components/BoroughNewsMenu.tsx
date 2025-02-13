@@ -14,6 +14,7 @@ interface BoroughNewsMenuProps {
     selectedBorough: string | null;
     selectedArticles: NewsMarker[];
     onClose: () => void;
+    selectedTopics: Set<string>;
 }
 
 const formatDateTime = (dateString: string) => {
@@ -43,10 +44,10 @@ const getSentimentClass = (sentiment: number | null | undefined) => {
     return 'bg-yellow-300/20 text-yellow-200';
 };
 
-export const BoroughNewsMenu = ({ selectedBorough, selectedArticles, onClose }: BoroughNewsMenuProps) => {
-
-    // Map "London" to "Westminster" for display purposes
+export const BoroughNewsMenu = ({ selectedBorough, selectedArticles, onClose, selectedTopics }: BoroughNewsMenuProps) => {
     const displayBorough = selectedBorough === "London" ? "Westminster" : selectedBorough;
+
+    const filteredArticles = selectedArticles.filter(article => selectedTopics.has(article.topic));
 
     return (
         <div className={`
@@ -57,7 +58,7 @@ export const BoroughNewsMenu = ({ selectedBorough, selectedArticles, onClose }: 
                 : 'opacity-0 translate-y-4 pointer-events-none'
             }
         `}>
-            <div className="glass-panel p-4 rounded-lg w-96 max-h-[70vh] overflow-y-auto">
+            <div className="glass-panel p-4 rounded-lg w-96 max-h-[70vh] overflow-y-auto custom-scrollbar">
                 <div className="sticky -top-4 -mx-4 px-4 pt-3 pb-3 mb-3 z-10 bg-background border-b border-border">
                     <button
                         onClick={onClose}
@@ -67,15 +68,15 @@ export const BoroughNewsMenu = ({ selectedBorough, selectedArticles, onClose }: 
                         ×
                     </button>
                     <h3 className="font-medium text-primary">{displayBorough}</h3>
-                    {selectedArticles.length > 1 && (
+                    {filteredArticles.length > 1 && (
                         <p className="text-xs text-muted-foreground mt-1">
-                            {selectedArticles.length} articles found
+                            {filteredArticles.length} articles found
                         </p>
                     )}
                 </div>
-                {selectedArticles.length > 0 ? (
+                {filteredArticles.length > 0 ? (
                     <div className="space-y-6">
-                        {selectedArticles.map((article, index) => (
+                        {filteredArticles.map((article, index) => (
                             <div
                                 key={article.id}
                                 className="transition-all duration-300 ease-in-out"
@@ -112,7 +113,7 @@ export const BoroughNewsMenu = ({ selectedBorough, selectedArticles, onClose }: 
                                         {article.topic} • {formatDateTime(article.date)}
                                     </span>
                                 </div>
-                                {index < selectedArticles.length - 1 && (
+                                {index < filteredArticles.length - 1 && (
                                     <div className="border-t border-border mt-6" />
                                 )}
                             </div>
@@ -124,6 +125,19 @@ export const BoroughNewsMenu = ({ selectedBorough, selectedArticles, onClose }: 
                     </p>
                 )}
             </div>
+            <style  >{`
+                .custom-scrollbar::-webkit-scrollbar {
+                    width: 8px;
+                }
+                .custom-scrollbar::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+                .custom-scrollbar::-webkit-scrollbar-thumb {
+                    background-color: #4CAF50; /* Green */
+                    border-radius: 10px;
+                    border: 2px solid transparent;
+                }
+            `}</style>
         </div>
     );
 }; 
