@@ -6,8 +6,8 @@ interface PaymentPopupProps {
 
 const PaymentPopup: React.FC<PaymentPopupProps> = ({ onClose }) => {
     return (
-        <div className="fixed inset-0 flex items-center justify-center z-[1000] bg-black bg-opacity-80">
-            <div className="bg-background/80 backdrop-blur-md p-8 rounded-lg text-center shadow-lg">
+        <div className="fixed inset-0 flex items-center justify-center z-[1000] bg-black bg-opacity-80" onClick={onClose}>
+            <div className="bg-background/80 backdrop-blur-md p-8 rounded-lg text-center shadow-lg" onClick={(e) => e.stopPropagation()}>
                 <p className="text-2xl font-bold mb-4 text-foreground">$1 / MONTH TO CONTINUE</p>
                 <button
                     onClick={(e) => {

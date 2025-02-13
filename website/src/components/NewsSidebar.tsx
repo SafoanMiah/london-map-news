@@ -37,15 +37,15 @@ export const NewsSidebar = () => {
   const getWidth = () => {
     const screenWidth = window.innerWidth;
     if (screenWidth >= 1920) { // 2K and above
-      return 500;
+      return 575;
     } else if (screenWidth >= 1440) { // Large desktop
-      return 450;
+      return 525;
     } else if (screenWidth >= 1024) { // Desktop
-      return 400;
+      return 475;
     } else if (screenWidth >= 768) { // Tablet
-      return 400;
+      return 475;
     } else { // Mobile
-      return 350;
+      return 425;
     }
   };
 

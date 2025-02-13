@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import PaymentPopup from './PaymentPopup';
+import { config } from '@/config/config';
 
 interface TopicCount {
     [topic: string]: number;
@@ -24,7 +25,7 @@ export const BoroughStats = ({ selectedBorough, newsData, onToggleTopic, selecte
     const [isUpdating, setIsUpdating] = useState(false);
     const [allTopics, setAllTopics] = useState<Set<string>>(new Set());
     const [viewMode, setViewMode] = useState<'chart' | 'list'>('list');
-    const [showPayment, setShowPayment] = useState(false);
+    const [showPayment, setShowPayment] = useState(config.showPaymentPopup);
 
     useEffect(() => {
         if (!newsData.length) return;
@@ -70,16 +71,6 @@ export const BoroughStats = ({ selectedBorough, newsData, onToggleTopic, selecte
 
         return () => clearTimeout(timer);
     }, [selectedBorough, newsData]);
-
-    useEffect(() => {
-        if (!showPayment) {
-            const handleGlobalClick = (e: MouseEvent) => {
-                setShowPayment(true);
-            };
-            window.addEventListener("click", handleGlobalClick, true);
-            return () => window.removeEventListener("click", handleGlobalClick, true);
-        }
-    }, [showPayment]);
 
     const handleTopicClick = (topic: string, event: React.MouseEvent) => {
         event.stopPropagation(); // Prevent event bubbling

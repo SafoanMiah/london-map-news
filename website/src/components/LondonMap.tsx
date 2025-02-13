@@ -3,6 +3,8 @@ import * as d3 from 'd3';
 import { useToast } from "@/hooks/use-toast";
 import { BoroughStats } from './BoroughStats';
 import { BoroughNewsMenu } from './BoroughNewsMenu';
+import PaymentPopup from './PaymentPopup';
+import { config } from '@/config/config';
 
 interface Borough {
   type: string;
@@ -57,6 +59,7 @@ export const LondonMap = () => {
   const [newsMarkers, setNewsMarkers] = useState<NewsMarker[]>([]);
   const [selectedArticles, setSelectedArticles] = useState<NewsMarker[]>([]);
   const [selectedTopics, setSelectedTopics] = useState<Set<string>>(new Set());
+  const [showPaymentPopup, setShowPaymentPopup] = useState(config.showPaymentPopup);
 
   // Fetch news markers
   useEffect(() => {
@@ -220,7 +223,7 @@ export const LondonMap = () => {
       </div>
       <svg
         ref={mapRef}
-        className="w-full h-full transform translate-x-[-100px]"
+        className="w-full h-full transform translate-x-[-65px]"
         viewBox={`0 0 ${window.innerWidth - 480} ${window.innerHeight}`}
         preserveAspectRatio="xMidYMid meet"
       />
@@ -233,6 +236,7 @@ export const LondonMap = () => {
         }}
         selectedTopics={selectedTopics}
       />
+      {showPaymentPopup && <PaymentPopup onClose={() => setShowPaymentPopup(false)} />}
       <style>{`
         @keyframes fadeSlideIn {
           from {
