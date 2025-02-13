@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { useToast } from "@/hooks/use-toast";
+import { BoroughStats } from './BoroughStats';
+import { BoroughNewsMenu } from './BoroughNewsMenu';
 
 interface Borough {
   type: string;
@@ -30,6 +32,7 @@ interface NewsMarker {
   location: string;
   sentiment: number;
   topic: string;
+  date: string;
 }
 
 const getSentimentClass = (sentiment: number | null | undefined) => {
@@ -37,6 +40,14 @@ const getSentimentClass = (sentiment: number | null | undefined) => {
   if (sentiment > 0) return 'bg-primary/20 text-primary';
   if (sentiment < 0) return 'bg-destructive/20 text-destructive';
   return 'bg-yellow-300/20 text-yellow-200';
+};
+
+const formatDateTime = (dateString: string) => {
+  const date = new Date(dateString);
+  return {
+    date: date.toLocaleDateString(),
+    time: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  };
 };
 
 export const LondonMap = () => {
@@ -84,7 +95,7 @@ export const LondonMap = () => {
 
     const path = d3.geoPath().projection(projection);
 
-    d3.json<GeoJSONData>('./london-boroughs_1179.geojson').then((data) => {
+    d3.json<GeoJSONData>('./public/london-boroughs.geojson').then((data) => {
       if (!data) return;
 
       // Calculate max articles for opacity scaling
@@ -132,7 +143,9 @@ export const LondonMap = () => {
         .append("text")
         .attr("class", d => {
           const hasNews = getArticleCount(d.properties.LAD13NM) > 0;
-          return `text-[8px] ${hasNews ? 'fill-foreground' : 'fill-foreground/50'} pointer-events-none font-medium`;
+          // map text size to screen size
+          const textSize = window.innerWidth < 768 ? '10px' : '13px';
+          return `text-[${textSize}] ${hasNews ? 'fill-foreground' : 'fill-foreground/50'} pointer-events-none font-medium`;
         })
         .attr("transform", d => {
           const centroid = path.centroid(d as any);
@@ -170,92 +183,26 @@ export const LondonMap = () => {
 
   return (
     <div className="w-full h-full relative">
+      <div className="absolute top-4 right-4 w-72">
+        <BoroughStats
+          selectedBorough={selectedBorough}
+          newsData={newsMarkers}
+        />
+      </div>
       <svg
         ref={mapRef}
         className="w-full h-full"
         viewBox={`0 0 ${window.innerWidth - 480} ${window.innerHeight}`}
         preserveAspectRatio="xMidYMid meet"
       />
-      <div
-        className={`
-          absolute bottom-4 right-4 
-          transition-all duration-300 ease-in-out
-          ${selectedBorough
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 translate-y-4 pointer-events-none'
-          }
-        `}
-      >
-        <div className="glass-panel p-4 rounded-lg w-96 max-h-[70vh] overflow-y-auto">
-          <div className="sticky -top-4 -mx-4 px-4 pt-3 pb-3 mb-3 z-10 bg-background border-b border-border">
-            <button
-              onClick={() => {
-                setSelectedArticles([]);
-                setSelectedBorough(null);
-              }}
-              className="absolute top-2 right-2 text-muted-foreground hover:text-primary 
-                       transition-colors duration-200"
-            >
-              ×
-            </button>
-            <h3 className="font-medium text-primary">{selectedBorough}</h3>
-            {selectedArticles.length > 1 && (
-              <p className="text-xs text-muted-foreground mt-1">
-                {selectedArticles.length} articles found
-              </p>
-            )}
-          </div>
-          {selectedArticles.length > 0 ? (
-            <div className="space-y-6">
-              {selectedArticles.map((article, index) => (
-                <div
-                  key={article.id}
-                  className="transition-all duration-300 ease-in-out"
-                  style={{
-                    animationDelay: `${index * 100}ms`,
-                    opacity: 0,
-                    animation: 'fadeSlideIn 0.3s forwards'
-                  }}
-                >
-                  <img
-                    src={article.thumbnail_url}
-                    alt={article.title}
-                    className="w-full h-40 object-cover rounded-lg mb-3 
-                             transition-transform duration-200 hover:scale-[1.02]"
-                  />
-                  <h4 className="font-medium mb-2 text-lg hover:text-primary transition-colors">
-                    {article.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {article.summary}
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <a
-                      href={article.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-primary hover:underline 
-                               transition-colors duration-200"
-                    >
-                      Read more →
-                    </a>
-                    <span className={`sentiment-badge ${getSentimentClass(article.sentiment)}`}>
-                      {article.topic}
-                    </span>
-                  </div>
-                  {index < selectedArticles.length - 1 && (
-                    <div className="border-t border-border mt-6" />
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-muted-foreground text-sm animate-fadeIn">
-              No articles available for {selectedBorough} yet.
-            </p>
-          )}
-        </div>
-      </div>
+      <BoroughNewsMenu
+        selectedBorough={selectedBorough}
+        selectedArticles={selectedArticles}
+        onClose={() => {
+          setSelectedArticles([]);
+          setSelectedBorough(null);
+        }}
+      />
       <style>{`
         @keyframes fadeSlideIn {
           from {
@@ -271,3 +218,5 @@ export const LondonMap = () => {
     </div>
   );
 };
+
+export default LondonMap;

@@ -1,3 +1,5 @@
+'''article_analysis.py contains functions to analyze news articles using the Groq API'''
+
 import os
 import requests
 import dotenv
@@ -26,11 +28,11 @@ def analyze_article(title, description):
     prompt = f"""Analyze this news article and extract key information. Follow these rules exactly:
 
     1. Location must be one of these London boroughs exactly: {', '.join(LONDON_BOROUGHS)}
-    2. Sentiment must be a number between -1 and 1 (e.g. -0.8, 0.5)
-    3. Topic must be exactly one of: Environment, Urbanization, Economy, Society
+    2. Sentiment must be a number between -1 and 1 (e.g. -0.8, 0.5), attempt to not give it a 0 sentiment if possible
+    3. Topic must be exactly one of: Environment, Urbanization, Economy, Society, Other, attempt to not give it a Other topic if possible
     4. Summary must be around 50 words
     
-    If no specific borough is mentioned, choose the most likely borough based on context or default to Westminster.
+    If no specific borough is mentioned, choose the most likely borough based on context, but if there really is no context, default to "London".
 
     Article Title: {title}
     Article Description: {description}

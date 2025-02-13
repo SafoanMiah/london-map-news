@@ -1,3 +1,5 @@
+'''fetch_latest_news.py contains functions to fetch news articles from the last N days'''
+
 import json
 import sys
 from datetime import datetime, timedelta

@@ -22,6 +22,14 @@ const getSentimentClass = (sentiment: number | null | undefined) => {
   return 'bg-yellow-300/20 text-yellow-200';
 };
 
+const formatDateTime = (dateString: string) => {
+  const date = new Date(dateString);
+  return {
+    date: date.toLocaleDateString(),
+    time: date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+  };
+};
+
 export const NewsSidebar = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -174,7 +182,48 @@ export const NewsSidebar = () => {
                     <p className="news-summary mt-2">{item.summary}</p>
                     <div className="flex flex-wrap justify-between items-center gap-2 mt-3">
                       <span className="text-xs text-muted-foreground">
-                        {new Date(item.date).toLocaleDateString()}
+                        {formatDateTime(item.date).date} • {formatDateTime(item.date).time}
+                      </span>
+                      <div className="flex gap-2">
+                        <span className={`sentiment-badge ${getSentimentClass(item.sentiment)}`}>
+                          {item.location || 'Unknown Location'}
+                        </span>
+                        <span className={`sentiment-badge ${getSentimentClass(item.sentiment)}`}>
+                          {item.topic || 'Other'}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="news-group">
+              {news.map((item, index) => (
+                <div key={`${item.id}-${index}-2`} className="news-card group">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={item.thumbnail_url}
+                      alt={item.title}
+                      className="news-image"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/placeholder.svg';
+                      }}
+                    />
+                    <div className="gradient-overlay" />
+                  </div>
+                  <div className="news-card-content">
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block group"
+                    >
+                      <h3 className="news-title">{item.title}</h3>
+                    </a>
+                    <p className="news-summary mt-2">{item.summary}</p>
+                    <div className="flex flex-wrap justify-between items-center gap-2 mt-3">
+                      <span className="text-xs text-muted-foreground">
+                        {formatDateTime(item.date).date} • {formatDateTime(item.date).time}
                       </span>
                       <div className="flex gap-2">
                         <span className={`sentiment-badge ${getSentimentClass(item.sentiment)}`}>
@@ -199,6 +248,21 @@ export const NewsSidebar = () => {
       >
         <GripVertical className="w-4 h-4" />
       </div>
+      <style>{`
+        .news-container {
+          animation: scroll 60s linear infinite;
+        }
+        .news-group {
+          min-height: 100%;
+        }
+        @keyframes scroll {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(-50%); }
+        }
+        .news-container:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </aside>
   );
 };

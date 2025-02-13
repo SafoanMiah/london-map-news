@@ -1,3 +1,5 @@
+'''fetch_from_db.py contains functions to fetch news articles from the database'''
+
 from database.supabase_setup import supabase
 
 def fetch_articles(sample: int = None, date_after: str = None):

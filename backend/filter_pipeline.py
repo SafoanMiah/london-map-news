@@ -1,10 +1,12 @@
+'''filter_pipeline.py contains functions to filter news articles'''
+
 from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
 
 
 
-# clean dates
+# CLEANING FUNCTIONSs
 def clean_all_dates(date_str):
     try:
         date = datetime.strptime(date_str, "%a, %d %b %Y %H:%M:%S %z")

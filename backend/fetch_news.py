@@ -1,3 +1,5 @@
+'''fetch_news.py contains functions to fetch news articles from RSS feeds'''
+
 import requests
 import feedparser
 from backend.filter_pipeline import rss_feed_pipeline

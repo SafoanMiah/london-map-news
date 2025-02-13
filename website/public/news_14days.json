@@ -1,5 +1,71 @@
 [
   {
+    "id": "57f933f4-bc22-406a-95c7-a7b5a99cc7ac",
+    "title": "Jackson Out For Six Weeks With Hamstring Injury",
+    "link": "https://www.bbc.com/sport/football/articles/c4gwvj43121o",
+    "summary": "Chelsea forward Nicolas Jackson injured for six weeks; Marc Guiu also injured, leaving Blues without a recognized number nine; Enzo Maresca's side to face Brighton in the league without them.",
+    "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/30b2/live/3f3aa410-e983-11ef-bd1b-d536627785f2.jpg",
+    "date": "2025-02-12T22:30:54.241387",
+    "sentiment": 0,
+    "topic": "Economy",
+    "location": "Hammersmith and Fulham"
+  },
+  {
+    "id": "e3beacff-2200-40e2-80f0-dd19dccb35e6",
+    "title": "The London Burger Restaurant Named The Uk'S Best Which Started Out As A Market Stall",
+    "link": "https://www.mylondon.news/whats-on/whats-on-news/london-burger-restaurant-named-uks-30992648",
+    "summary": "Black Bear Burger, a London-based restaurant with locations in Camden and other boroughs, was named the UK's best burger at the National Burger Awards 2025. The company started as a market stall and has grown to include multiple locations. The award-winning Miso Bacon Burger is made with high-quality ingredients and was chosen from 16 finalists.",
+    "thumbnail_url": "https://i2-prod.mylondon.news/whats-on/food-drink-news/article30861194.ece/ALTERNATES/s615/0_Black-Bear-Miso-Bacon-Burger.jpg",
+    "date": "2025-02-12T20:51:05.808477",
+    "sentiment": 0.8,
+    "topic": "Economy",
+    "location": "Camden"
+  },
+  {
+    "id": "e98c2bd0-b972-4e06-a6ec-836864b435a5",
+    "title": "Full Dates Heathrow Airport Staff Striking In February - With Threat To Extend Made",
+    "link": "https://www.mylondon.news/news/west-london-news/full-dates-heathrow-airport-staff-30993680",
+    "summary": "Cleaning staff at Heathrow Airport, employed by OCS, plan to strike over low wages, with the action scheduled for February 25-28. Unite claims most OCS workers are not paid the real living wage, despite the company being accredited by the Living Wage Foundation. The union alleges that British Airways workers employed by OCS are paid the legal minimum wage, causing some to rely on food banks and struggle to pay rent.",
+    "thumbnail_url": "https://i2-prod.mylondon.news/incoming/article29842753.ece/ALTERNATES/s615/4_GettyImages-1840740499-1.jpg",
+    "date": "2025-02-12T20:20:30.998183",
+    "sentiment": -0.6,
+    "topic": "Economy",
+    "location": "Hillingdon"
+  },
+  {
+    "id": "a7824a2a-2a5a-4d6f-a06d-a6c4359af027",
+    "title": "Real Reason Ross Kemp Left Eastenders As He Makes Grant Mitchell Comeback",
+    "link": "https://www.mylondon.news/news/tv/eastenders-ross-kemp-return-grant-30981835",
+    "summary": "Ross Kemp is returning to EastEnders as Grant Mitchell for the show's 40th anniversary. He will support his brother Phil Mitchell during his mental health battle. Fans can expect his return scenes in February. Since leaving EastEnders in 1999, Kemp has had a successful career in documentaries and other TV/film roles, but has expressed regret about leaving the soap.",
+    "thumbnail_url": "https://i2-prod.mylondon.news/news/tv/article30981668.ece/ALTERNATES/s615/0_GettyImages-1442215794.jpg",
+    "date": "2025-02-12T19:39:47.676897",
+    "sentiment": 0.5,
+    "topic": "Society",
+    "location": "Westminster"
+  },
+  {
+    "id": "32244157-cfce-4944-849b-e568b6399757",
+    "title": "First Photos Of Shepherd'S Bush Stabbing Scene After Man Attacked In Broad Daylight",
+    "link": "https://www.mylondon.news/news/west-london-news/gallery/first-photos-shepherds-bush-stabbing-30993313",
+    "summary": "A man was stabbed in Shepherd's Bush in broad daylight, resulting in a negative societal impact for the Hammersmith and Fulham borough.",
+    "thumbnail_url": "https://i2-prod.mylondon.news/incoming/article30993316.ece/ALTERNATES/s615/0_WhatsApp-Image-2025-02-12-at-163949jpeg.jpg",
+    "date": "2025-02-12T19:19:24.496905",
+    "sentiment": -0.6,
+    "topic": "Society",
+    "location": "Hammersmith and Fulham"
+  },
+  {
+    "id": "bd22b558-73f8-4ca6-a4aa-67cb263b6b5c",
+    "title": "South London Restaurant Announces Shock Closure After 12 Years - Owners Tease Who Is Taking Over",
+    "link": "https://www.mylondon.news/whats-on/whats-on-news/south-london-restaurant-announces-shock-30992258",
+    "summary": "Forza Win, an Italian restaurant in Camberwell, is closing after 12 years. Known for its 'Italian-ish' five-course dinners and handmade Clemencello, it was a popular spot among London's foodies. The closure has been met with disappointment from patrons. The owners will focus on expanding their sister business, Forza Wine, and have found someone to take over the space.",
+    "thumbnail_url": "https://i2-prod.mylondon.news/incoming/article29528921.ece/ALTERNATES/s615/0_GettyImages-689346606.jpg",
+    "date": "2025-02-12T19:01:00.682924",
+    "sentiment": -0.6,
+    "topic": "Society",
+    "location": "Southwark"
+  },
+  {
     "id": "96678c41-74a2-4dff-a672-ca3cd04cd969",
     "title": "Eastenders' Danny Dyer'S Famous Son-In-Law Sends Fans Wild As He Makes Soap Debut",
     "link": "https://www.mylondon.news/news/tv/eastenders-danny-dyers-famous-son-30993623",

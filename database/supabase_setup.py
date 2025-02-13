@@ -1,3 +1,5 @@
+'''supabase_setup.py contains the setup for the Supabase client'''
+
 from supabase import create_client
 from dotenv import load_dotenv
 import os
