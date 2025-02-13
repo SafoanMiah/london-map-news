@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import PaymentPopup from './PaymentPopup';
 
 interface TopicCount {
     [topic: string]: number;
@@ -15,9 +16,6 @@ interface BoroughStatsProps {
     onToggleTopic: (topic: string) => void;
     selectedTopics: Set<string>;
 }
-
-
-const rickRoll = true;
 
 export const BoroughStats = ({ selectedBorough, newsData, onToggleTopic, selectedTopics }: BoroughStatsProps) => {
     const [avgSentiment, setAvgSentiment] = useState<number | null>(null);
@@ -74,7 +72,7 @@ export const BoroughStats = ({ selectedBorough, newsData, onToggleTopic, selecte
     }, [selectedBorough, newsData]);
 
     useEffect(() => {
-        if (rickRoll && !showPayment) {
+        if (!showPayment) {
             const handleGlobalClick = (e: MouseEvent) => {
                 setShowPayment(true);
             };
@@ -221,22 +219,7 @@ export const BoroughStats = ({ selectedBorough, newsData, onToggleTopic, selecte
                     )}
                 </div>
             </div>
-            {rickRoll && showPayment && (
-                <div className="fixed inset-0 flex items-center justify-center z-[1000] bg-black bg-opacity-80">
-                    <div className="bg-background p-6 rounded-lg text-center shadow-lg">
-                        <p className="text-2xl font-bold mb-4 text-foreground">PAY $1 TO CONTINUE</p>
-                        <button
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                            }}
-                            className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2 px-4 rounded transition-colors"
-                        >
-                            Subscribe Now
-                        </button>
-                    </div>
-                </div>
-            )}
+            {showPayment && <PaymentPopup onClose={() => setShowPayment(false)} />}
         </>
     );
 };
