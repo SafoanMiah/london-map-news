@@ -212,7 +212,8 @@ export const LondonMap = () => {
   }, [selectedBorough]);
 
   return (
-    <div className="w-full h-full relative">
+    //change map size
+    <div className="map-container" style={{ width: '100%', height: '100%' }}>
       <div className="absolute top-4 right-4 w-72">
         <BoroughStats
           selectedBorough={selectedBorough}
@@ -223,7 +224,8 @@ export const LondonMap = () => {
       </div>
       <svg
         ref={mapRef}
-        className="w-full h-full transform translate-x-[-65px]"
+        //move map
+        className="w-full h-full transform translate-x-[-85px] translate-y-[-10px]"
         viewBox={`0 0 ${window.innerWidth - 480} ${window.innerHeight}`}
         preserveAspectRatio="xMidYMid meet"
       />

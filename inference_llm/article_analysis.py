@@ -32,7 +32,8 @@ def analyze_article(title, description):
     3. Topic must be exactly one of: Environment, Urbanization, Economy, Society, Other, attempt to not give it a Other topic if possible
     4. Summary must be around 50 words
     
-    If no specific borough is mentioned, choose the most likely borough based on context, but if there really is no context, default to "London".
+    If no specific borough is mentioned, choose the most likely borough based on context, you MUST put it somehwere.
+    At the very least make sure to put the ones from Tower Hamlets in place properly, as its most important for this.
 
     Article Title: {title}
     Article Description: {description}
@@ -55,7 +56,7 @@ def analyze_article(title, description):
             {"role": "user", "content": prompt}
         ],
         "temperature": 0.1,
-        "max_tokens": 500
+        "max_tokens": 1000
     }
 
     # Try to analyze article
