@@ -7,7 +7,6 @@ from datetime import datetime
 from load_id import load_existing_links, save_new_link
 import uuid
 import requests
-import backoff
 import socket
 
 sys.path.append(os.path.join(os.path.dirname(os.path_abspath(__file__)), '..'))
@@ -28,9 +27,6 @@ def is_network_error(exception):
                                 socket.gaierror, 
                                 requests.exceptions.Timeout))
 
-@backoff.on_exception(backoff.expo, 
-                     (requests.exceptions.ConnectionError, socket.gaierror),
-                     max_tries=5)
 def insert_with_retry(table, **data):
     """Insert data with retry logic for network errors"""
     try:
