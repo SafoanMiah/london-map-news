@@ -10,12 +10,12 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
 
 LONDON_BOROUGHS = [
-    'Barking and Dagenham', 'Barnet', 'Bexley', 'Brent', 'Bromley', 'Camden',
+    'Tower Hamlets', 'Barking and Dagenham', 'Barnet', 'Bexley', 'Brent', 'Bromley', 'Camden',
     'Croydon', 'Ealing', 'Enfield', 'Greenwich', 'Hackney',
     'Hammersmith and Fulham', 'Haringey', 'Harrow', 'Havering', 'Hillingdon',
     'Hounslow', 'Islington', 'Kensington and Chelsea', 'Kingston upon Thames',
     'Lambeth', 'Lewisham', 'Merton', 'Newham', 'Redbridge',
-    'Richmond upon Thames', 'Southwark', 'Sutton', 'Tower Hamlets',
+    'Richmond upon Thames', 'Southwark', 'Sutton',
     'Waltham Forest', 'Wandsworth', 'Westminster'
 ]
 
@@ -32,8 +32,12 @@ def analyze_article(title, description):
     3. Topic must be exactly one of: Environment, Urbanization, Economy, Society, Other, attempt to not give it a Other topic if possible
     4. Summary must be around 50 words
     
+<<<<<<< HEAD
     If no specific borough is mentioned, choose the most likely borough based on context, you MUST put it somehwere.
     At the very least make sure to put the ones from Tower Hamlets in place properly, as its most important for this.
+=======
+    You must analyze the databases title and description to find specific borough, you can also look at your own summary.
+>>>>>>> fd870e5283774203894138fd279c5212d9c68416
 
     Article Title: {title}
     Article Description: {description}
