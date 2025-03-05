@@ -1,5 +1,49 @@
 [
   {
+    "id": "d943cecd-8c20-4d13-b699-cbe015d0cc53",
+    "title": "Family-Friendly Festival Planned For Richmond Park",
+    "link": "https://www.bbc.com/news/articles/c15qqvwz998o",
+    "summary": "A family-friendly music festival, Raver Tots, is being proposed for Old Deer Park in Richmond upon Thames. The event would take place annually in August and feature a film-themed event, live music, and a family-friendly open-air dancefloor. Residents have raised concerns about granting a permanent license, but the organizers argue that it will provide a safe and successful cultural and entertainment facility for local families.",
+    "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/395a/live/798869d0-f4f6-11ef-ab77-6b27a1316238.jpg",
+    "date": "2025-03-05T06:30:02.949737",
+    "sentiment": 0.5,
+    "topic": "Society",
+    "location": "Richmond upon Thames"
+  },
+  {
+    "id": "a64177b6-bcd5-4397-8db0-7844b55de9f3",
+    "title": "Watch: On Patrol With The London Pigeon Rescue Team",
+    "link": "https://www.bbc.com/news/articles/c0l108j5ggxo",
+    "summary": "A volunteer group, the London Pigeon Rescue Team, is working to help pigeons with \"stringfoot\" condition in Tower Hamlets, aiming to change negative attitudes towards the birds.",
+    "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/bd5e/live/0e17f490-f839-11ef-9e61-71ee71f26eb1.jpg",
+    "date": "2025-03-05T06:29:19.827285",
+    "sentiment": 0.5,
+    "topic": "Environment",
+    "location": "Tower Hamlets"
+  },
+  {
+    "id": "e6792bf3-e881-4262-82af-ea78990df89e",
+    "title": "Flypast And Concert For Ve Day 80Th Commemorations",
+    "link": "https://www.bbc.com/news/articles/crewnnzv8g7o",
+    "summary": "The government has announced a four-day celebration of the 80th anniversary of VE Day, including a flypast, concert, and a Westminster Abbey service. Veterans will be attending the events, which will run from May 5 to 8. The commemorations aim to allow people to hear veterans' stories, pay tribute to those who served in WWII, and uphold British values. There will be a military procession, flypast, installation of ceramic poppies, concert, and service. International guests, including possibly US President Donald Trump, may attend.",
+    "thumbnail_url": "https://ichef.bbci.co.uk/ace/standard/240/cpsprodpb/be56/live/c6b13e00-f927-11ef-9cc1-0f3c4de978dc.jpg",
+    "date": "2025-03-05T06:29:19.397697",
+    "sentiment": 0.5,
+    "topic": "Society",
+    "location": "Westminster"
+  },
+  {
+    "id": "a23d2cee-1423-4f1f-a0c1-f61d10b672ac",
+    "title": "Sabrina Carpenter Tickets And How To Buy Last-Minute Entry To O2 Arena Gigs",
+    "link": "https://www.mylondon.news/whats-on/music-nightlife-news/sabrina-carpenter-tickets-o2-arena-31119919",
+    "summary": "Sabrina Carpenter is returning to London's O2 Arena for two shows in 2025. Initial tickets sold out quickly, but resale tickets are still available on websites like Viagogo, Vivid Seats, and StubHub. Fans can also buy tickets with added bonuses through Seat Unique. The high demand for tickets indicates a positive impact on the local economy.",
+    "thumbnail_url": "https://i2-prod.mylondon.news/incoming/article31119811.ece/ALTERNATES/s615/0_GettyImages-2202736062.jpg",
+    "date": "2025-03-05T06:29:12.450322",
+    "sentiment": 0.5,
+    "topic": "Economy",
+    "location": "Tower Hamlets"
+  },
+  {
     "id": "f9408042-cdac-4234-a43a-04cea5b3b329",
     "title": "M&S Shoppers Love 'Classy' Belted Trench Coat That'S Ideal For Spring",
     "link": "https://www.mylondon.news/whats-on/shopping/marks-and-spencer-trench-coat-31116867",
