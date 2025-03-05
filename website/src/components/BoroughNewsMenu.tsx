@@ -33,7 +33,7 @@ const formatDateTime = (dateString: string) => {
         });
     }
 
-    // Show only date for older articles
+    // show only date for older articles
     return date.toLocaleDateString();
 };
 

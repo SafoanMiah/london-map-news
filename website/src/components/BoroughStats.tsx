@@ -98,9 +98,9 @@ export const BoroughStats = ({ selectedBorough, newsData, onToggleTopic, selecte
 
     // Generate colors based on sentiment
     const getTopicColor = (sentiment: number) => {
-        if (sentiment > 0) return '#0ea5e9';  // primary color
-        if (sentiment < 0) return '#ef4444';  // destructive color
-        return '#eab308';  // yellow/neutral color
+        if (sentiment > 0) return '#10b981';  // green color for positive sentiment
+        if (sentiment < 0) return '#ef4444';  // red negative color
+        return '#eab308';  // yellow neutral color
     };
 
     if (!newsData.length) {

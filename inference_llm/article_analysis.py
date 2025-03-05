@@ -32,12 +32,8 @@ def analyze_article(title, description):
     3. Topic must be exactly one of: Environment, Urbanization, Economy, Society, Other, attempt to not give it a Other topic if possible
     4. Summary must be around 50 words
     
-<<<<<<< HEAD
-    If no specific borough is mentioned, choose the most likely borough based on context, you MUST put it somehwere.
+    If no specific borough is mentioned, choose the most likely borough based on context, you MUST put it somewhere.
     At the very least make sure to put the ones from Tower Hamlets in place properly, as its most important for this.
-=======
-    You must analyze the databases title and description to find specific borough, you can also look at your own summary.
->>>>>>> fd870e5283774203894138fd279c5212d9c68416
 
     Article Title: {title}
     Article Description: {description}
@@ -63,7 +59,7 @@ def analyze_article(title, description):
         "max_tokens": 1000
     }
 
-    # Try to analyze article
+    # try to analyze article
     try:
         response = requests.post(GROQ_API_URL, headers=headers, json=payload)
         response.raise_for_status()
@@ -73,7 +69,7 @@ def analyze_article(title, description):
         ai_response = result['choices'][0]['message']['content'].strip()
         lines = [line.strip() for line in ai_response.split('\n') if line.strip()]
         
-        # Parse response
+        # parse response
         location = next(line.split(': ', 1)[1] for line in lines if line.startswith('Location:'))
         sentiment_str = next(line.split(': ', 1)[1] for line in lines if line.startswith('Sentiment:'))
         try:
@@ -81,13 +77,13 @@ def analyze_article(title, description):
         except ValueError:
             sentiment = 0
         
-        # Parse topic
+        # parse topic
         topic = next(line.split(': ', 1)[1] for line in lines if line.startswith('Topic:'))
         
-        # Parse summary
+        # parse summary
         summary = next(line.split(': ', 1)[1] for line in lines if line.startswith('Summary:'))
 
-        # Ensure location is a valid borough
+        # ensure location is a valid borough
         if location not in LONDON_BOROUGHS:
             location = 'Westminster'
 
@@ -99,18 +95,17 @@ def analyze_article(title, description):
         }
 
     except Exception as e:
-        # print(f"Error analyzing article: {e}")
-        # Handle rate limiting by adding a delay
+        # handle rate limiting by adding a delay
         if "429" in str(e):
             print("Rate limited, waiting 10 seconds...")
             time.sleep(10)
         
-        # Safe fallback values incase of error
+        # safe fallback values incase of error
         safe_description = description if description else "No description available"
         safe_summary = safe_description[:200] + "..." if len(safe_description) > 200 else safe_description
         
         return {
-            "location": "Westminster",
+            "location": "Westminster", # temporary defualt to not lose any news.
             "sentiment": 0,
             "topic": "Other", 
             "summary": safe_summary

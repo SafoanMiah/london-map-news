@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 https://www.mylondon.news/news/local-news/coffee-secret-business-weapon-tendendo-31026668
 https://www.mylondon.news/whats-on/shopping/amazon-knocks-60-shampoo-conditioner-31026718
 https://www.mylondon.news/news/tv/bbc-breakfast-interrupted-jon-kay-31026029
@@ -62,4 +60,3 @@ https://www.mylondon.news/news/celebs/strictlys-amy-dowden-honoured-buckingham-3
 https://www.mylondon.news/news/uk-world-news/vote-open-public-crown-uks-31027490
 https://www.mylondon.news/news/uk-world-news/pay-growth-picks-up-pace-31027224
 https://www.mylondon.news/news/celebs/mary-berry-delighted-joins-celebrities-31027627
->>>>>>> fd870e5283774203894138fd279c5212d9c68416

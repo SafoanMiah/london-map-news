@@ -39,14 +39,3 @@ def fetch_column(column: str):
     else:
         print(f"No {column} found")
         return []
-
-# Test usage
-if __name__ == "__main__":
-    articles = fetch_articles(sample=1)
-    for article in articles:
-        print('\n')
-        print(f"{article['title']}")
-        print(f"Link: {article['link']}")
-        print(f"Created: {article['created_at']}")
-        print(f"Thumbnail: {article['thumbnail_url']}\n")
-        print('\n')

@@ -61,7 +61,7 @@ export const LondonMap = () => {
   const [selectedTopics, setSelectedTopics] = useState<Set<string>>(new Set());
   const [showPaymentPopup, setShowPaymentPopup] = useState(config.showPaymentPopup);
 
-  // Fetch news markers
+  // fetch news markers
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -72,7 +72,7 @@ export const LondonMap = () => {
         const data = await response.json();
         setNewsMarkers(data);
 
-        // Initialize selectedTopics with all topics
+        // initialize selectedTopics with all topics
         const allTopics = new Set(data.map((article: NewsMarker) => article.topic));
         setSelectedTopics(allTopics as Set<string>);
       } catch (error) {
@@ -106,7 +106,7 @@ export const LondonMap = () => {
     d3.json<GeoJSONData>('./public/london-boroughs.geojson').then((data) => {
       if (!data) return;
 
-      // Calculate max articles for opacity scaling
+      // calculate max articles for opacity scaling
       const getArticleCount = (boroughName: string) =>
         newsMarkers.filter(m => m.location === boroughName).length;
 
@@ -114,7 +114,7 @@ export const LondonMap = () => {
         getArticleCount(d.properties.LAD13NM)
       ));
 
-      // Create borough paths
+      // create borough paths
       svg.selectAll("path")
         .data(data.features)
         .enter()
@@ -144,7 +144,7 @@ export const LondonMap = () => {
           setSelectedArticles(boroughArticles);
         });
 
-      // Add borough labels
+      // add borough labels
       svg.selectAll("text")
         .data(data.features)
         .enter()
@@ -162,7 +162,7 @@ export const LondonMap = () => {
         .attr("text-anchor", "middle")
         .text(d => d.properties.LAD13NM);
 
-      // // Add article count badges for boroughs with news, number of articles
+      // // add article count badges for boroughs with news, number of articles
       // svg.selectAll("circle")
       //   .data(data.features.filter(d => getArticleCount(d.properties.LAD13NM) > 0))
       //   .enter()
@@ -203,7 +203,7 @@ export const LondonMap = () => {
     });
   };
 
-  // Reset topic selection when borough changes
+  // reset topic selection when borough changes
   useEffect(() => {
     if (selectedBorough) {
       const allTopics = new Set(newsMarkers.map(article => article.topic));
@@ -212,7 +212,7 @@ export const LondonMap = () => {
   }, [selectedBorough]);
 
   return (
-    //change map size
+    // change map size
     <div className="map-container" style={{ width: '100%', height: '100%' }}>
       <div className="absolute top-4 right-4 w-72">
         <BoroughStats

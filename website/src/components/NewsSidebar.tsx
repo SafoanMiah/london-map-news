@@ -33,7 +33,7 @@ export const NewsSidebar = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [news, setNews] = useState<NewsItem[]>([]);
 
-  // Calculate default width based on screen size
+  // calculate default width based on screen size
   const getWidth = () => {
     const screenWidth = window.innerWidth;
     if (screenWidth >= 1920) { // 2K and above
@@ -49,7 +49,7 @@ export const NewsSidebar = () => {
     }
   };
 
-  // Initialize width with responsive default
+  // initialize width with responsive default
   const [width] = useState(getWidth());
 
   const fetchLatestNews = async () => {
@@ -67,7 +67,7 @@ export const NewsSidebar = () => {
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .slice(0, 5);
 
-        // Set news with the 5 latest articles
+        // set news with the 5 latest articles
         setNews(latestArticles);
       } else {
         console.warn('No articles found in news_14days.json');
@@ -81,7 +81,7 @@ export const NewsSidebar = () => {
 
   useEffect(() => {
     fetchLatestNews();
-    // Fetch new articles every 2 minutes
+    // fetch new articles every 2 minutes
     const interval = setInterval(fetchLatestNews, 120000);
     return () => clearInterval(interval);
   }, []);
